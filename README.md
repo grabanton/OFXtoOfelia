@@ -6,7 +6,7 @@ Adaptation of the openFrameworks tutorials by [**Lewis Lepton**](http://lewislep
 Found and explain diferences in original openFrameworks and ofelia methods, used in this course.<br />
 Unfortunately addons, used in this tutorials, not available in ofelia for now. And I didn't do videos wich include any addons.
 Except `ofxKinnekt`, which was replaced by the standard module `ofVideoGrabber` and `ofxAssimpModelLoader`, which was replaced by the standard module `ofMesh`.<br />
-Instead of the ofxGui GUI I used the built in pure data GUI objects.
+Instead of the `ofxGui` I used the built in pure data GUI objects.
 And took pure data sound analizing tools for building sound spectrum in 047 and 048 patches.
 
 ---
