@@ -1,4 +1,4 @@
-#N canvas 1960 68 823 1072 12;
+#N canvas 480 65 831 1072 12;
 #X declare -path ofelia/abs;
 #X obj 398 56 declare -path ofelia/abs;
 #X obj 34 86 ofWindow;
@@ -44,6 +44,9 @@ mesh:addIndex(i) \; mesh:addIndex(j) \; end \; end \; end \;;
 #X text 377 887 Be attentive when iterate by vertices in mesh. In Lua
 indices of tables starts with 1 \, but ofMesh():getVrtex() starts from
 0 as in normal programming language ));
+#X text 519 103 You need to install the mrpeach library to receive
+OSC messages. TouchOsc file for android or IOS devices can be found
+in the data folder., f 35;
 #X connect 2 0 13 0;
 #X connect 3 0 7 0;
 #X connect 4 0 12 0;
