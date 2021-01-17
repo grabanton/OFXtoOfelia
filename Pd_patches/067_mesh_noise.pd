@@ -1,0 +1,39 @@
+#N canvas 1106 149 652 899 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 33 722 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 33 131 ofSetup;
+#X obj 93 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 478 111 hsl 128 15 0 6 0 1 empty empty empty 5 8 0 10 -191407
+-1 -1 2117 1;
+#X obj 475 138 ofelia f \; amount = a \;;
+#X obj 33 517 ofUpdate;
+#X obj 33 751 ofelia f \; ofPushMatrix() \; cam:beginCamera() \; ofSetColor(255)
+\; mesh:drawWireframe() \; cam:endCamera() \; ofPopMatrix() \;;
+#X obj 33 546 ofelia f \; local count = 0 \; for x = 1 \, size do \;
+for y = 1 \, size do \; local position = ofVec3f(mesh:getVertex(count))
+\; position.z = ofMap(ofNoise(count \, ofGetElapsedTimef()) \, 0 \,
+1 \, 0 \, amount) \; mesh:setVertex(count \, position:vec3()) \; count
+= count + 1 \; end \; end \;;
+#X f 75;
+#X obj 33 162 ofelia f \; cam = ofEasyCam() \; cam:setDistance(100)
+\; mesh = ofMesh() \; amount = 1 \; size = 96 \; \; for x = 1 \, size
+do \; for y = 1 \, size do \; mesh:addVertex(ofPoint(x - size/2 \,
+y - size/2):vec3()) \; end \; end \; \; for x = 0 \, size - 2 do \;
+for y = 0 \, size - 2 do \; mesh:addIndex(x + y * size) \; mesh:addIndex((x
++ 1) + y * size) \; mesh:addIndex(x + (y + 1) * size) \; mesh:addIndex((x
++ 1) + y * size) \; mesh:addIndex((x + 1) + (y + 1) * size) \; mesh:addIndex(x
++ (y + 1) * size) \; end \; end \;;
+#X text 423 110 Amount;
+#X connect 2 0 10 0;
+#X connect 3 0 6 0;
+#X connect 4 0 12 0;
+#X connect 5 0 12 0;
+#X connect 6 0 1 0;
+#X connect 7 0 8 0;
+#X connect 9 0 11 0;

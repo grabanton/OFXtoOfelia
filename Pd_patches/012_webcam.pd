@@ -1,0 +1,26 @@
+#N canvas 1103 361 586 483 12;
+#X declare -path ofelia/abs;
+#X obj 370 56 declare -path ofelia/abs;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 86 ofWindow;
+#X obj 32 323 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 34 132 ofSetup;
+#X obj 96 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 233 ofUpdate;
+#X obj 34 160 ofelia f \; webcam = ofVideoGrabber() \; webcam:setup(640
+\, 480) \;;
+#X obj 33 263 ofelia f \; webcam:update() \;;
+#X obj 32 351 ofelia f \; webcam:draw(0 \, 0 \, 320 \, 240) \;;
+#X f 29;
+#X obj 255 323 ofExit;
+#X obj 255 351 ofelia f \; webcam:close() \; webcam = nil \;;
+#X f 29;
+#X connect 1 0 2 0;
+#X connect 3 0 10 0;
+#X connect 4 0 1 0;
+#X connect 5 0 8 0;
+#X connect 6 0 8 0;
+#X connect 7 0 9 0;
+#X connect 11 0 12 0;

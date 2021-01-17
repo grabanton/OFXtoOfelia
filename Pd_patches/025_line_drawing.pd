@@ -1,0 +1,87 @@
+#N canvas 1058 0 622 1024 12;
+#X declare -path ofelia/abs;
+#X obj 396 59 declare -path ofelia/abs;
+#X msg 34 59 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 89 ofWindow;
+#X obj 35 799 ofDraw;
+#X obj 34 30 loadbang;
+#X obj 79 147 ofSetup;
+#X obj 79 124 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 37 397 ofMouseDragged;
+#X obj 36 612 ofMouseReleased;
+#X obj 36 717 ofelia f \; nPts = 0 \; pts = ofTable() \;;
+#X obj 35 896 ofelia f \; if nPts > 1 then \; for i = 1 \, #pts-1 do
+\; ofDrawLine(pts[i].x \, pts[i].y \, pts[i+1].x \, pts[i+1].y) \;
+end \; end \;;
+#X obj 171 307 ofelia f \; MAXPOINTS = 100 \; polyline = ofPolyline()
+\;;
+#X obj 257 177 vradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144
+-1 -1 1;
+#X obj 37 250 route 0 1;
+#X obj 257 217 s \$0-m;
+#X obj 26 176 r \$0-m;
+#X msg 79 176 1;
+#X obj 37 222 pack;
+#X obj 257 124 loadbang;
+#X msg 37 280 bang;
+#X msg 171 280 bang;
+#X obj 118 421 r \$0-m;
+#X obj 37 471 route 0 1;
+#X obj 37 444 list prepend;
+#X obj 117 635 r \$0-m;
+#X obj 36 658 list prepend;
+#X obj 116 798 r \$0-m;
+#X obj 35 854 route 0 1;
+#X obj 35 828 list prepend;
+#X text 277 174 ofPoints mode;
+#X text 277 191 ofPolyline mode;
+#X obj 37 506 ofelia f \; if nPts < MAXPOINTS then \; pts[nPts] = ofPoint(a[1]
+\, a[2]) \; nPts = nPts + 1 \; end \;;
+#X obj 261 635 r \$0-m;
+#X obj 180 658 list prepend;
+#X obj 180 612 ofMousePressed;
+#X obj 180 685 route 0 1;
+#X obj 436 895 ofelia f \; polyline:draw() \;;
+#X obj 279 505 ofelia f \; polyline:addVertex(a[1] \, a[2]) \;;
+#X obj 210 717 ofelia f \; polyline:addVertex(a[1] \, a[2]) \;;
+#X obj 37 308 ofelia f \; MAXPOINTS = 100 \; pts = ofTable() \; nPts
+= 1 \;;
+#X msg 257 150 0;
+#X obj 36 684 route 0 1;
+#X text 243 394 Draw the line by two diferent approachs \; 1 draw only
+100 points and clear line after release mouse \; 2 draw inf number
+of points and connect each next line start with previous line end.
+, f 43;
+#X connect 1 0 2 0;
+#X connect 3 0 28 0;
+#X connect 4 0 1 0;
+#X connect 5 0 16 0;
+#X connect 6 0 5 0;
+#X connect 7 0 23 0;
+#X connect 8 0 25 0;
+#X connect 12 0 14 0;
+#X connect 13 0 19 0;
+#X connect 13 1 20 0;
+#X connect 15 0 17 0;
+#X connect 16 0 17 1;
+#X connect 17 0 13 0;
+#X connect 18 0 40 0;
+#X connect 19 0 39 0;
+#X connect 20 0 11 0;
+#X connect 21 0 23 1;
+#X connect 22 0 31 0;
+#X connect 22 1 37 0;
+#X connect 23 0 22 0;
+#X connect 24 0 25 1;
+#X connect 25 0 41 0;
+#X connect 26 0 28 1;
+#X connect 27 0 10 0;
+#X connect 27 1 36 0;
+#X connect 28 0 27 0;
+#X connect 32 0 33 1;
+#X connect 33 0 35 0;
+#X connect 34 0 33 0;
+#X connect 35 1 38 0;
+#X connect 40 0 12 0;
+#X connect 41 0 9 0;

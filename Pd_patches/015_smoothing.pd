@@ -1,0 +1,20 @@
+#N canvas 1061 420 588 355 12;
+#X declare -path ofelia/abs;
+#X obj 371 59 declare -path ofelia/abs;
+#X msg 34 59 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 89 ofWindow;
+#X obj 34 240 ofDraw;
+#X obj 34 30 loadbang;
+#X obj 34 132 ofSetup;
+#X obj 96 134 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 34 268 ofelia f \; ofDrawLine(64 \, 64 \, 256 \, 128) \; ofDrawCircle(ofGetWidth()/2
+\, ofGetHeight()/2 \, 128) \;;
+#X f 54;
+#X obj 34 160 ofelia f \; ofSetBackgroundColor(60) \; ofEnableSmoothing()
+\; ofSetCircleResolution(128) \;;
+#X connect 1 0 2 0;
+#X connect 3 0 7 0;
+#X connect 4 0 1 0;
+#X connect 5 0 8 0;
+#X connect 6 0 8 0;

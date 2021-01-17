@@ -1,0 +1,23 @@
+#N canvas 1185 135 591 465 12;
+#X declare -path ofelia/abs;
+#X obj 368 56 declare -path ofelia/abs;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 86 ofWindow;
+#X obj 36 338 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 36 150 ofSetup;
+#X obj 96 152 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 36 204 pdcontrol;
+#X msg 36 178 dir 0 data/object.ply;
+#X obj 36 231 ofelia f \; mesh = ofMesh() \; mesh:load(a) \; cam =
+ofEasyCam() \; cam:setDistance(2) \; cam:setNearClip(0.1) \;;
+#X obj 36 365 ofelia f \; cam:beginCamera() \; mesh:draw() \; cam:endCamera()
+\;;
+#X connect 1 0 2 0;
+#X connect 3 0 10 0;
+#X connect 4 0 1 0;
+#X connect 5 0 8 0;
+#X connect 6 0 8 0;
+#X connect 7 0 9 0;
+#X connect 8 0 7 0;

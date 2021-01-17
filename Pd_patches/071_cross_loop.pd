@@ -1,0 +1,36 @@
+#N canvas 1115 178 604 487 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 33 234 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 33 131 ofSetup;
+#X obj 93 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 200 164 hsl 128 15 1 12 0 1 \$0-amount empty empty -2 -8 0 10
+-191407 -1 -1 12700 1;
+#X text 142 163 Amount;
+#X obj 200 194 hsl 128 15 0 30 0 1 \$0-speed empty empty -2 -8 0 10
+-191407 -1 -1 4333 1;
+#X text 149 193 Speed;
+#X obj 33 263 ofelia f \; for i = 0 \, amount-1 do \; for j = 0 \,
+amount-1 do \; ofPushMatrix() \; ofTranslate(i * 90 \, j * 90) \; ofRotateDeg(ofGetElapsedTimef()
+* speed) \; ofSetRectMode(OF_RECTMODE_CENTER) \; ofDrawRectangle(0
+\, 0 \, 30 \, 90) \; ofDrawRectangle(0 \, 0 \, 90 \, 30) \; ofPopMatrix()
+\; end \; end \;;
+#X obj 33 162 ofelia f \; amount = 12 \; speed = 10 \;;
+#N canvas 1223 772 184 227 get 1;
+#X obj 45 57 ofelia f \; amount = a \;;
+#X obj 45 147 ofelia f \; speed = a \;;
+#X obj 45 28 r \$0-amount;
+#X obj 45 118 r \$0-speed;
+#X connect 2 0 0 0;
+#X connect 3 0 1 0;
+#X restore 263 131 pd get ui;
+#X connect 2 0 11 0;
+#X connect 3 0 6 0;
+#X connect 4 0 12 0;
+#X connect 5 0 12 0;
+#X connect 6 0 1 0;

@@ -1,0 +1,106 @@
+#N canvas 1135 261 732 638 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 33 465 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 33 131 ofSetup;
+#X obj 93 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 264 ofUpdate;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 406 164 hradio 15 1 1 4 \$0-mode empty uiMode -52 8 0 13 -191407
+-1 -1 1;
+#X obj 409 189 hsl 128 15 0 1 0 1 \$0-X1 empty X1 5 8 0 10 -191407
+-1 -1 8900 1;
+#X obj 409 210 hsl 128 15 0 1 0 1 \$0-X2 empty X2 5 8 0 10 -191407
+-1 -1 3700 1;
+#X obj 409 231 hsl 128 15 0 1 0 1 \$0-X3 empty X3 5 8 0 10 -191407
+-1 -1 8900 1;
+#X obj 409 252 hsl 128 15 0 1 0 1 \$0-X4 empty X4 5 8 0 10 -191407
+-1 -1 3600 1;
+#X obj 554 189 hsl 128 15 0 1 0 1 \$0-Y1 empty Y1 5 8 0 10 -191407
+-1 -1 3700 1;
+#X obj 554 210 hsl 128 15 0 1 0 1 \$0-Y2 empty Y2 5 8 0 10 -191407
+-1 -1 8700 1;
+#X obj 554 231 hsl 128 15 0 1 0 1 \$0-Y3 empty Y3 5 8 0 10 -191407
+-1 -1 8700 1;
+#X obj 554 252 hsl 128 15 0 1 0 1 \$0-Y4 empty Y4 5 8 0 10 -191407
+-1 -1 3800 1;
+#X text 342 218 Position;
+#X obj 33 292 ofelia f \; if mode == 0 then \; ofSetPolyMode(OF_POLY_WINDING_POSITIVE)
+\; elseif mode == 1 then \; ofSetPolyMode(OF_POLY_WINDING_NONZERO)
+\; elseif mode == 2 then \; ofSetPolyMode(OF_POLY_WINDING_ODD) \; elseif
+mode == 3 then \; ofSetPolyMode(OF_POLY_WINDING_ABS_GEQ_TWO) \; end
+\;;
+#X obj 33 494 ofelia f \; ofBeginShape() \; ofVertex(posx.x \, posy.x)
+\; ofVertex(posx.y \, posy.y) \; ofVertex(posx.z \, posy.z) \; ofVertex(posx.w
+\, posy.w) \; ofEndShape() \;;
+#X obj 33 164 ofelia f \; ofSetPolyMode(OF_POLY_WINDING_POSITIVE) \;
+mode = 1 \; posx = ofVec4f(720 \, 300 \, 720 \, 300) \; posy = ofVec4f(220
+\, 520 \, 520 \, 220) \;;
+#N canvas 2175 461 605 525 get 0;
+#X obj 46 389 pack 0 0 0 0;
+#X obj 46 359 t b f;
+#X obj 91 359 t b f;
+#X obj 137 359 t b f;
+#X obj 46 42 loadbang;
+#X obj 113 43 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 299 388 pack 0 0 0 0;
+#X obj 299 358 t b f;
+#X obj 344 358 t b f;
+#X obj 390 358 t b f;
+#X obj 46 275 ofelia f \; mode = a \;;
+#X obj 46 69 ofelia d \$0-ui \; \; function M.setPos(posVec \, values
+\, size) \; local width = ofGetWidth() \; local v = ofTable() \; for
+i = 1 \, 4 do \; v[i] = ofMap(values[i] \, 0 \, 1 \, 0 \, size) \;
+end \; posVec:set(v[1] \, v[2] \, v[3] \, v[4]) \; \; end \;;
+#X obj 46 419 ofelia f \; local ui = require("\$0-ui") \; ui.setPos(posx
+\, a \, ofGetWidth()) \;;
+#X obj 299 418 ofelia f \; local ui = require("\$0-ui") \; ui.setPos(posy
+\, a \, ofGetHeight()) \;;
+#X obj 46 245 r \$0-mode;
+#X obj 46 330 r \$0-X1;
+#X obj 106 330 r \$0-X2;
+#X obj 166 330 r \$0-X3;
+#X obj 226 330 r \$0-X4;
+#X obj 299 330 r \$0-Y1;
+#X obj 359 330 r \$0-Y2;
+#X obj 419 330 r \$0-Y3;
+#X obj 479 330 r \$0-Y4;
+#X text 346 98 Define function for write values in position vectors
+, f 28;
+#X connect 0 0 12 0;
+#X connect 1 0 0 0;
+#X connect 1 1 0 1;
+#X connect 2 0 0 0;
+#X connect 2 1 0 2;
+#X connect 3 0 0 0;
+#X connect 3 1 0 3;
+#X connect 4 0 11 0;
+#X connect 5 0 11 0;
+#X connect 6 0 13 0;
+#X connect 7 0 6 0;
+#X connect 7 1 6 1;
+#X connect 8 0 6 0;
+#X connect 8 1 6 2;
+#X connect 9 0 6 0;
+#X connect 9 1 6 3;
+#X connect 14 0 10 0;
+#X connect 15 0 0 0;
+#X connect 16 0 1 0;
+#X connect 17 0 2 0;
+#X connect 18 0 3 0;
+#X connect 19 0 6 0;
+#X connect 20 0 7 0;
+#X connect 21 0 8 0;
+#X connect 22 0 9 0;
+#X restore 617 164 pd get ui;
+#X connect 2 0 19 0;
+#X connect 3 0 7 0;
+#X connect 4 0 20 0;
+#X connect 5 0 20 0;
+#X connect 6 0 18 0;
+#X connect 7 0 1 0;

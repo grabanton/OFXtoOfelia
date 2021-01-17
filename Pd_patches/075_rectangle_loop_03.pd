@@ -1,0 +1,56 @@
+#N canvas 1159 315 678 495 12;
+#X declare -path ofelia/abs;
+#X obj 389 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 35 270 ofDraw;
+#X obj 34 27 loadbang;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 34 130 ofSetup;
+#X obj 95 132 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 191 155 hsl 128 15 0 64 0 1 \$0-width empty Width 5 8 0 10 -191407
+-1 -1 9525 1;
+#X obj 191 175 hsl 128 15 0 64 0 1 \$0-height empty Height 5 8 0 10
+-191407 -1 -1 9525 1;
+#X text 149 165 Size;
+#X obj 191 205 hsl 128 15 0 32 0 1 \$0-powX empty X 5 8 0 10 -99865
+-1 -1 9525 1;
+#X obj 191 225 hsl 128 15 0 32 0 1 \$0-powY empty Y 5 8 0 10 -99865
+-1 -1 9525 1;
+#X text 142 215 Power;
+#X obj 34 165 ofelia f \; width = 48 \; height = 48 \; xpower = 24
+\; ypower = 24 \;;
+#X obj 35 299 ofelia f \; ofSetRectMode(OF_RECTMODE_CENTER) \; ofNoFill()
+\; ofSetLineWidth(2) \; \; for x = 0 \, 31 do \; for y = 0 \, 31 do
+\; ofDrawRectangle(x * 64 \, y * 64 \, math.sin(x + ofGetElapsedTimef())
+* xpower \, height) \; ofDrawRectangle(x * 64 \, y * 64 \, height \,
+math.sin(y + ofGetElapsedTimef()) * ypower) \; end \; end \;;
+#X f 85;
+#N canvas 1333 882 347 355 get 1;
+#X obj 50 63 t b f;
+#X obj 50 88 pack 0 0;
+#X obj 50 118 ofelia f \; width \, height = a[1] \, a[2] \;;
+#X obj 50 213 t b f;
+#X obj 50 238 pack 0 0;
+#X obj 50 268 ofelia f \; xpower \, ypower = a[1] \, a[2] \;;
+#X obj 50 30 r \$0-width;
+#X obj 130 30 r \$0-height;
+#X obj 50 180 r \$0-powX;
+#X obj 125 180 r \$0-powY;
+#X connect 0 0 1 0;
+#X connect 0 1 1 1;
+#X connect 1 0 2 0;
+#X connect 3 0 4 0;
+#X connect 3 1 4 1;
+#X connect 4 0 5 0;
+#X connect 6 0 1 0;
+#X connect 7 0 0 0;
+#X connect 8 0 4 0;
+#X connect 9 0 3 0;
+#X restore 254 122 pd get ui;
+#X connect 2 0 14 0;
+#X connect 3 0 4 0;
+#X connect 4 0 1 0;
+#X connect 5 0 13 0;
+#X connect 6 0 13 0;

@@ -1,0 +1,101 @@
+#N canvas 2253 265 749 771 12;
+#X declare -path ofelia/abs;
+#X obj 494 60 declare -path ofelia/abs;
+#X obj 34 90 ofWindow;
+#X obj 33 583 ofDraw;
+#X obj 34 31 loadbang;
+#X obj 33 135 ofSetup;
+#X obj 94 137 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 481 ofUpdate;
+#X msg 33 197 dir 0 data/shader4;
+#X obj 33 228 pdcontrol;
+#X msg 34 60 setGLVersion 3 2 \, setPosition 30 100 \, setSize 1024
+768 \, create, f 62;
+#X obj 183 228 pdcontrol;
+#X msg 183 197 dir 0 data/video.mp4;
+#X obj 33 260 list append;
+#X obj 33 165 t b b;
+#X obj 466 129 cnv 15 164 80 empty \$0-screen empty 20 12 0 14 -166529
+-24198 0;
+#X obj 486 140 hsl 128 15 0 1 0 1 \$0-R empty R 5 8 0 12 -258113 -1
+-1 8100 1;
+#X obj 486 159 hsl 128 15 0 1 0 1 \$0-G empty G 5 8 0 12 -4034 -1 -1
+8500 1;
+#X obj 486 179 hsl 128 15 0 1 0 1 \$0-B empty B 5 8 0 12 -4160 -1 -1
+0 1;
+#X obj 486 229 hsl 128 15 0 1 0 1 \$0-threshold empty empty 5 8 0 12
+-191407 -1 -1 7000 1;
+#X text 410 228 Threshold;
+#X text 376 160 Screen Color;
+#N canvas 907 402 376 594 get 0;
+#X obj 35 58 t b f;
+#X obj 74 58 t b f;
+#X obj 35 86 pack 0 0 0;
+#X obj 36 407 ofelia f \; threshold = a \;;
+#X obj 35 30 r \$0-R;
+#X obj 85 30 r \$0-G;
+#X obj 135 30 r \$0-B;
+#X obj 36 381 r \$0-threshold;
+#X obj 35 118 unpack 0 0 0;
+#X obj 35 243 makefilename %02x;
+#X obj 75 214 makefilename %02x;
+#X obj 116 185 makefilename %02x;
+#X obj 35 273 pack s s s;
+#X msg 35 303 color #\$1\$2\$3;
+#X obj 35 333 s \$0-screen;
+#X obj 116 150 * 255;
+#X obj 75 185 * 255;
+#X obj 35 214 * 255;
+#X obj 129 72 ofelia f \; color:set(a[1] \, a[2] \, a[3]) \;;
+#X connect 0 0 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 2 0;
+#X connect 1 1 2 2;
+#X connect 2 0 8 0;
+#X connect 2 0 18 0;
+#X connect 4 0 2 0;
+#X connect 5 0 0 0;
+#X connect 6 0 1 0;
+#X connect 7 0 3 0;
+#X connect 8 0 17 0;
+#X connect 8 1 16 0;
+#X connect 8 2 15 0;
+#X connect 9 0 12 0;
+#X connect 10 0 12 1;
+#X connect 11 0 12 2;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 15 0 11 0;
+#X connect 16 0 10 0;
+#X connect 17 0 9 0;
+#X restore 644 130 pd get ui;
+#X obj 471 582 ofExit;
+#X obj 471 609 ofelia f \; webcam:close() \; webcam = nil \;;
+#X obj 33 509 ofelia f \; video:update() \; webcam:update() \;;
+#X obj 33 292 ofelia f \; color = ofFloatColor(0 \, 1 \, 0 \, 1) \;
+threshold = 0.6 \; shader = ofShader() \; shader:load(a[1]) \; video
+= ofVideoPlayer() \; video:load(a[2]) \; video:play() \; video:setVolume(0)
+\; webcam = ofVideoGrabber() \; webcam:setup(ofGetWidth() \, ofGetHeight())
+\;;
+#X f 44;
+#X obj 33 610 ofelia f \; ofEnableArbTex() \; video:draw(0 \, 0) \;
+shader:beginShader() \; shader:setUniform3f("u_color" \, color.r \,
+color.g \, color.b) \; shader:setUniform1f("u_threshold" \, threshold)
+\; webcam:draw(0 \, 0) \; shader:endShader() \;;
+#X text 219 500 In the fragment shader uniform sampler2DRect changed
+to a sampler2D type. Now it works correctly., f 31;
+#X connect 2 0 26 0;
+#X connect 3 0 9 0;
+#X connect 4 0 13 0;
+#X connect 5 0 13 0;
+#X connect 6 0 24 0;
+#X connect 7 0 8 0;
+#X connect 8 0 12 0;
+#X connect 9 0 1 0;
+#X connect 10 0 12 1;
+#X connect 11 0 10 0;
+#X connect 12 0 25 0;
+#X connect 13 0 7 0;
+#X connect 13 1 11 0;
+#X connect 22 0 23 0;

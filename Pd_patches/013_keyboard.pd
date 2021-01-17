@@ -1,0 +1,25 @@
+#N canvas 1067 214 586 597 12;
+#X declare -path ofelia/abs;
+#X obj 370 57 declare -path ofelia/abs;
+#X msg 34 57 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 87 ofWindow;
+#X obj 33 500 ofDraw;
+#X obj 34 28 loadbang;
+#X obj 33 135 ofSetup;
+#X obj 93 136 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 244 ofkeyPressed;
+#X obj 33 528 ofelia f \; ofDrawCircle(x \, y \, 128) \;;
+#X f 29;
+#X obj 33 163 ofelia f \; x = 0 \; y = 0 \; step = 10 \;;
+#X obj 33 274 ofelia f \; \; if a == 32 then \; x = ofRandom(0 \, ofGetWidth())
+\; y = ofRandom(0 \, ofGetHeight()) \; elseif a == OF_KEY_LEFT then
+\; x = x - step \; elseif a == OF_KEY_RIGHT then \; x = x + step \;
+elseif a == OF_KEY_UP then \; y = y - step \; elseif a == OF_KEY_DOWN
+then \; y = y + step \; end \;;
+#X connect 1 0 2 0;
+#X connect 3 0 8 0;
+#X connect 4 0 1 0;
+#X connect 5 0 9 0;
+#X connect 6 0 9 0;
+#X connect 7 0 10 0;

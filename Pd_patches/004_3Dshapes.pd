@@ -1,0 +1,14 @@
+#N canvas 1909 430 594 325 12;
+#X declare -path ofelia/abs;
+#X obj 375 57 declare -path ofelia/abs;
+#X msg 33 57 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 33 87 ofWindow;
+#X obj 34 134 ofDraw;
+#X obj 34 28 loadbang;
+#X obj 34 163 ofelia f \; ofNoFill() \; ofDrawBox(64 \, 256 \, 0 \,
+64 \, 64 \, 64) \; ofDrawCone(160 \, 256 \, 0 \, 32 \, 128) \; ofDrawCylinder(256
+\, 256 \, 32 \, 128) \; ofDrawIcoSphere(352 \, 256 \, 0 \, 32) \; ofDrawPlane(448
+\, 256 \, 64 \, 64) \; ofDrawSphere(544 \, 256 \, 32) \;;
+#X connect 1 0 2 0;
+#X connect 3 0 5 0;
+#X connect 4 0 1 0;

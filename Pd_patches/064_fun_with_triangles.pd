@@ -1,0 +1,118 @@
+#N canvas 1071 236 628 643 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 32 296 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 33 131 ofSetup;
+#X obj 93 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 427 124 hsl 128 15 0 1 0 1 \$0-posX empty X 5 8 0 10 -191407
+-1 -1 1613 1;
+#X obj 427 144 hsl 128 15 0 1 0 1 \$0-posY empty Y 5 8 0 10 -191407
+-1 -1 597 1;
+#X text 358 132 Position;
+#X obj 427 174 hsl 128 15 1 64 0 1 \$0-amount empty empty 5 8 0 10
+-99865 -1 -1 1814 1;
+#X obj 427 204 hsl 128 15 0 300 0 1 \$0-stepX empty X 5 8 0 10 -191407
+-1 -1 3175 1;
+#X obj 427 224 hsl 128 15 0 300 0 1 \$0-stepY empty Y 5 8 0 10 -191407
+-1 -1 2117 1;
+#X text 385 214 Step;
+#X obj 427 254 hsl 128 15 -180 180 0 1 \$0-rotX empty X 5 8 0 10 -99865
+-1 -1 6879 1;
+#X obj 427 274 hsl 128 15 -180 180 0 1 \$0-rotY empty Y 5 8 0 10 -99865
+-1 -1 6174 1;
+#X obj 427 294 hsl 128 15 -180 180 0 1 \$0-rotZ empty Z 5 8 0 10 -99865
+-1 -1 5292 1;
+#X text 371 272 Rotate;
+#X obj 427 324 hsl 128 15 0 300 0 0 \$0-shiftX empty X 5 8 0 10 -191407
+-1 -1 0 1;
+#X obj 427 344 hsl 128 15 0 300 0 0 \$0-shiftY empty Y 5 8 0 10 -191407
+-1 -1 0 1;
+#X text 378 334 Shift;
+#X obj 427 374 hsl 128 15 0 30 0 1 \$0-sizeX empty X 5 8 0 10 -99865
+-1 -1 2540 1;
+#X obj 427 394 hsl 128 15 0 30 0 1 \$0-sizeY empty Y 5 8 0 10 -99865
+-1 -1 2540 1;
+#X text 384 384 Size;
+#X text 371 172 Amount;
+#X obj 32 325 ofelia f \; ofPushMatrix() \; ofTranslate(position.x
+\, position.y) \; for i = 0 \, amount do \; ofPushMatrix() \; ofTranslate(i*step.x
+\, i*step.y) \; ofRotateXDeg(i*rotate.x) \; ofRotateYDeg(i*rotate.y)
+\; ofRotateZDeg(i*rotate.z) \; ofTranslate(i*shift.x \, i*shift.y)
+\; ofScale(size.x \, size.y) \; --[[ofDrawTriangle(0 \, 0 \, -16 \,
+32 \, 16 \, 32)]] \; ofBeginShape() \; ofVertex(0 \, 0) \; ofVertex(-16
+\, 32) \; ofVertex(16 \, 32) \; ofEndShape() \; ofPopMatrix() \; end
+\; ofPopMatrix() \;;
+#X obj 33 168 ofelia f \; position = ofVec2f(130 \, 36) \; amount =
+10 \; step = ofVec2f(75 \, 50) \; rotate = ofVec3f(15 \, -5 \, -30)
+\; shift = ofVec2f(0 \, 0) \; size = ofVec2f(6 \, 6) \;;
+#N canvas 2294 225 489 872 get 1;
+#X obj 60 93 pack 0 0;
+#X obj 60 69 t b f;
+#X obj 60 121 ofelia f \; position:set(a[1]*ofGetWidth() \, a[2]*ofGetHeight())
+\;;
+#X obj 60 210 ofelia f \; amount = a \;;
+#X obj 60 322 pack 0 0;
+#X obj 60 298 t b f;
+#X obj 60 351 ofelia f \; step:set(a[1] \, a[2]) \;;
+#X obj 61 443 t b f;
+#X obj 61 467 pack 0 0 0;
+#X obj 61 495 ofelia f \; rotate:set(a[1] \, a[2] \, a[3]) \;;
+#X obj 107 443 t b f;
+#X obj 61 607 pack 0 0;
+#X obj 61 583 t b f;
+#X obj 61 635 ofelia f \; shift:set(a[1] \, a[2]) \;;
+#X obj 61 763 pack 0 0;
+#X obj 61 739 t b f;
+#X obj 61 791 ofelia f \; size:set(a[1] \, a[2]) \;;
+#X obj 60 39 r \$0-posX;
+#X obj 134 39 r \$0-posY;
+#X obj 60 181 r \$0-amount;
+#X obj 60 269 r \$0-stepX;
+#X obj 142 269 r \$0-stepY;
+#X obj 60 414 r \$0-rotX;
+#X obj 136 414 r \$0-rotY;
+#X obj 60 555 r \$0-shiftX;
+#X obj 150 555 r \$0-shiftY;
+#X obj 60 710 r \$0-sizeX;
+#X obj 144 710 r \$0-sizeY;
+#X obj 213 414 r \$0-rotZ;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 1 1 0 1;
+#X connect 4 0 6 0;
+#X connect 5 0 4 0;
+#X connect 5 1 4 1;
+#X connect 7 0 8 0;
+#X connect 7 1 8 1;
+#X connect 8 0 9 0;
+#X connect 10 0 8 0;
+#X connect 10 1 8 2;
+#X connect 11 0 13 0;
+#X connect 12 0 11 0;
+#X connect 12 1 11 1;
+#X connect 14 0 16 0;
+#X connect 15 0 14 0;
+#X connect 15 1 14 1;
+#X connect 17 0 0 0;
+#X connect 18 0 1 0;
+#X connect 19 0 3 0;
+#X connect 20 0 4 0;
+#X connect 21 0 5 0;
+#X connect 22 0 8 0;
+#X connect 23 0 7 0;
+#X connect 24 0 11 0;
+#X connect 25 0 12 0;
+#X connect 26 0 14 0;
+#X connect 27 0 15 0;
+#X connect 28 0 10 0;
+#X restore 490 424 pd get ui;
+#X connect 2 0 25 0;
+#X connect 3 0 6 0;
+#X connect 4 0 26 0;
+#X connect 5 0 26 0;
+#X connect 6 0 1 0;

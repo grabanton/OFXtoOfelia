@@ -1,0 +1,70 @@
+#N canvas 2285 248 814 890 12;
+#X declare -path ofelia/abs;
+#X obj 367 57 declare -path ofelia/abs;
+#X msg 34 57 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 87 ofWindow;
+#X obj 32 376 ofDraw;
+#X obj 34 28 loadbang;
+#X obj 33 148 ofSetup;
+#X obj 97 126 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 32 264 ofUpdate;
+#X obj 205 263 ofDragged;
+#X obj 32 575 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 177 ofelia f \; sound = ofTable() \; image = ofTable() \;
+video = ofTable() \;;
+#X obj 205 176 ofelia d \$0-f \; function M.GetFileExtension(s) \;
+return s:match("^.+(%..+)$") \; end \;;
+#X text 59 568 Bang this for stop all sounds, f 17;
+#X obj 97 148 t b b;
+#X text 121 124 Bang this for clear all content;
+#X obj 32 603 ofelia f \; for i = 1 \, #sound do \; sound[i]:stop()
+\; end \; for i = 1 \, #video do \; video[i]:stop() \; end \;;
+#X text 526 296 In this example you can drag and drop multiple files
+with diferent types at the same time., f 36;
+#X text 527 780 Here we fill the global video table with files in videos.
+, f 34;
+#X text 527 709 Here we fill the global image table with files in images.
+, f 34;
+#X text 527 599 Here we fill the global sound table with files in sounds.
+, f 34;
+#X obj 32 406 ofelia f \; for i = 1 \, #image do \; image[i]:draw(0
+\, 0) \; end \; \; for v = 1 \, #video do \; video[v]:draw(0 \, 0)
+\; end \;;
+#X obj 32 293 ofelia f \; for v = 1 \, #video do \; video[v]:update()
+\; end \;;
+#X text 527 445 Here we check file extensions and fill 3 local tables
+by type: sounds \, images and videos., f 36;
+#X obj 148 148 s stop;
+#X obj 32 545 r stop;
+#X text 527 388 Here we check type of input and if it's a string \,
+wrap it in the table \, for iterate over this table later., f 36;
+#X obj 205 291 ofelia f \; local f = require("\$0-f") \; local files
+= a \; local sounds = ofTable() \; local images = ofTable() \; local
+videos = ofTable() \; \; if type(files) == "string" then \; files =
+ofTable(a) \; end \; \; for i = 1 \, #files do \; local ext = f.GetFileExtension(files[i])
+\; if ext == ".wav" or ext == ".mp3" then \; table.insert(sounds \,
+files[i]) \; elseif ext == ".png" or ext == ".jpg" then \; table.insert(images
+\, files[i]) \; elseif ext == ".mp4" or ext == ".mov" then \; table.insert(videos
+\, files[i]) \; end \; end \; \; for s = 1 \, #sounds do \; sound[s]
+= ofSoundPlayer() \; sound[s]:load(sounds[s]) \; sound[s]:play() \;
+sound[s]:setVolume(0.6) \; sound[s]:setLoop(true) \; end \; \; for
+i = 1 \, #images do \; image[i] = ofImage() \; image[i]:load(images[i])
+\; end \; \; for v = 1 \, #videos do \; video[v] = ofVideoPlayer()
+\; video[v]:load(videos[v]) \; video[v]:play() \; end \;;
+#X f 44;
+#X text 436 190 Define a function for matching file extensions., f
+25;
+#X connect 1 0 2 0;
+#X connect 3 0 20 0;
+#X connect 4 0 1 0;
+#X connect 5 0 10 0;
+#X connect 5 0 11 0;
+#X connect 6 0 13 0;
+#X connect 7 0 21 0;
+#X connect 8 0 26 0;
+#X connect 9 0 15 0;
+#X connect 13 0 10 0;
+#X connect 13 1 23 0;
+#X connect 24 0 9 0;

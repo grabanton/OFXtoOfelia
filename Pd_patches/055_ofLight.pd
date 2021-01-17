@@ -1,0 +1,51 @@
+#N canvas 1032 47 613 592 12;
+#X declare -path ofelia/abs;
+#X obj 398 96 declare -path ofelia/abs;
+#X obj 34 126 ofWindow;
+#X obj 31 407 ofDraw;
+#X obj 35 67 loadbang;
+#X obj 33 171 ofSetup;
+#X obj 93 173 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 32 307 ofUpdate;
+#X msg 34 96 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 364 207 hsl 128 15 -300 300 0 1 \$0-X empty X 0 8 0 10 -191407
+-1 -1 9600 1;
+#X obj 364 229 hsl 128 15 -300 300 0 1 \$0-Y empty Y 0 8 0 10 -191407
+-1 -1 10450 1;
+#X obj 364 251 hsl 128 15 -300 300 0 1 \$0-Z empty Z 0 8 0 10 -191407
+-1 -1 9550 1;
+#X obj 32 335 ofelia f \; light:setPosition(pos.x \, pos.y \, pos.z)
+\;;
+#X obj 33 206 ofelia f \; camera = ofEasyCam() \; light = ofLight()
+\; pos = ofVec3f(0 \, 0 \, 0) \;;
+#X obj 31 434 ofelia f \; ofEnableDepthTest() \; light:enable() \;
+camera:beginCamera() \; ofDrawSphere(pos.x \, pos.y \, pos.z \, 32)
+\; ofDrawBox(0 \, 0 \, 0 \, 128) \; camera:endCamera() \; light:disable()
+\;;
+#X f 41;
+#X text 252 229 Light Position;
+#N canvas 1025 817 318 207 get 0;
+#X obj 42 94 pack 0 0 0;
+#X obj 42 63 t b f;
+#X obj 85 63 t b f;
+#X obj 42 121 ofelia f \; pos:set(a[1] \, a[2] \, a[3]) \;;
+#X obj 43 32 r \$0-X;
+#X obj 93 32 r \$0-Y;
+#X obj 143 32 r \$0-Z;
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 1 1 0 1;
+#X connect 2 0 0 0;
+#X connect 2 1 0 2;
+#X connect 4 0 0 0;
+#X connect 5 0 1 0;
+#X connect 6 0 2 0;
+#X restore 427 280 pd get ui;
+#X connect 2 0 13 0;
+#X connect 3 0 7 0;
+#X connect 4 0 12 0;
+#X connect 5 0 12 0;
+#X connect 6 0 11 0;
+#X connect 7 0 1 0;

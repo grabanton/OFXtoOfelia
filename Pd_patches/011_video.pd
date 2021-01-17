@@ -1,0 +1,27 @@
+#N canvas 1111 315 577 496 12;
+#X declare -path ofelia/abs;
+#X obj 368 56 declare -path ofelia/abs;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 86 ofWindow;
+#X obj 31 410 ofDraw;
+#X obj 35 27 loadbang;
+#X obj 34 125 ofSetup;
+#X obj 94 127 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 32 178 pdcontrol;
+#X obj 32 308 ofUpdate;
+#X obj 32 209 ofelia f \; video = ofVideoPlayer() \; video:load(a)
+\; video:setVolume(0.3) \; video:play() \;;
+#X obj 32 338 ofelia f \; video:update() \; video:setSpeed(0.6) \;
+;
+#X obj 31 438 ofelia f \; video:draw(0 \, 0 \, 300 \, 300) \;;
+#X f 28;
+#X msg 34 155 dir 0 data/video.mp4;
+#X connect 1 0 2 0;
+#X connect 3 0 11 0;
+#X connect 4 0 1 0;
+#X connect 5 0 12 0;
+#X connect 6 0 12 0;
+#X connect 7 0 9 0;
+#X connect 8 0 10 0;
+#X connect 12 0 7 0;

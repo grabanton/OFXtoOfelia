@@ -1,0 +1,68 @@
+#N canvas 1130 121 638 773 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 33 414 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 33 131 ofSetup;
+#X obj 93 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 450 156 hsl 128 15 1 4 0 1 \$0-amount empty empty -2 -8 0 10
+-191407 -1 -1 12700 1;
+#X text 392 155 Amount;
+#X obj 450 186 hsl 128 15 0 60 0 1 \$0-power empty empty -2 -8 0 10
+-99865 -1 -1 12700 1;
+#X text 399 185 Power;
+#X obj 450 216 hsl 128 15 -300 300 0 1 \$0-posX empty X 5 8 0 10 -191407
+-1 -1 12700 1;
+#X text 336 234 Light Position;
+#X obj 450 236 hsl 128 15 -300 300 0 1 \$0-posY empty Y 5 8 0 10 -191407
+-1 -1 12700 1;
+#X obj 450 256 hsl 128 15 -300 300 0 1 \$0-posZ empty Z 5 8 0 10 -191407
+-1 -1 12700 1;
+#X obj 33 324 ofUpdate;
+#X obj 33 353 ofelia f \; light:setPosition(lightPosition:vec3()) \;
+;
+#X obj 33 443 ofelia f \; ofPushMatrix() \; ofEnableDepthTest() \;
+light:enable() \; cam:beginCamera() \; \; for i = 0 \, amount-1 do
+\; for j = 0 \, amount-1 do \; local y = math.sin(ofGetElapsedTimef()
++ i) * power \; ofSetColor(200 \, 150 \, 130) \; ofDrawSphere(i * 64
+\, 48 - y \, j * 64 \, 16) \; ofSetColor(140) \; ofDrawCylinder(i *
+64 \, 0 \, j * 64 \, 24 \, 128) \; end \; end \; \; cam:endCamera()
+\; light:disable() \; ofDisableDepthTest() \; ofPopMatrix() \;;
+#X obj 33 162 ofelia f \; amount = 4 \; power = 60 \; lightPosition
+= ofVec3f(300 \, 300 \, 300) \; cam = ofEasyCam() \; light = ofLight()
+\; \; ofSetCylinderResolution(128 \, 64) \; ofSetSphereResolution(128)
+\;;
+#N canvas 1545 948 404 379 get 0;
+#X obj 62 49 ofelia f \; amount = a \;;
+#X obj 62 139 ofelia f \; power = a \;;
+#X obj 63 232 t b f;
+#X obj 111 232 t b f;
+#X obj 63 263 pack 0 0 0;
+#X obj 63 293 ofelia f \; lightPosition:set(a[1] \, a[2] \, a[3]) \;
+;
+#X obj 62 20 r \$0-amount;
+#X obj 62 110 r \$0-power;
+#X obj 62 203 r \$0-posX;
+#X obj 139 203 r \$0-posY;
+#X obj 216 203 r \$0-posZ;
+#X connect 2 0 4 0;
+#X connect 2 1 4 1;
+#X connect 3 0 4 0;
+#X connect 3 1 4 2;
+#X connect 4 0 5 0;
+#X connect 6 0 0 0;
+#X connect 7 0 1 0;
+#X connect 8 0 4 0;
+#X connect 9 0 2 0;
+#X connect 10 0 3 0;
+#X restore 513 285 pd get ui;
+#X connect 2 0 17 0;
+#X connect 3 0 6 0;
+#X connect 4 0 18 0;
+#X connect 5 0 18 0;
+#X connect 6 0 1 0;
+#X connect 15 0 16 0;

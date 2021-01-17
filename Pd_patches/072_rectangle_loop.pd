@@ -1,0 +1,15 @@
+#N canvas 2260 127 591 350 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 34 130 ofDraw;
+#X obj 34 27 loadbang;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 34 159 ofelia f \; ofTranslate(ofGetWidth()/2 \, ofGetHeight()/2)
+\; ofNoFill() \; ofSetLineWidth(2) \; ofSetRectMode(OF_RECTMODE_CENTER)
+\; for i = 1 \, 30 do \; ofRotateDeg(ofGetElapsedTimef()) \; ofScale(0.9)
+\; ofDrawRectangle(0 \, 0 \, 500 \, 500) \; end \;;
+#X connect 2 0 5 0;
+#X connect 3 0 4 0;
+#X connect 4 0 1 0;

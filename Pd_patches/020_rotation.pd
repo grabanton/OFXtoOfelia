@@ -1,0 +1,22 @@
+#N canvas 1072 182 589 495 12;
+#X declare -path ofelia/abs;
+#X obj 369 59 declare -path ofelia/abs;
+#X msg 34 60 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 90 ofWindow;
+#X obj 32 316 ofDraw;
+#X obj 34 31 loadbang;
+#X obj 33 141 ofSetup;
+#X obj 92 144 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 170 ofelia f \; rotate = 0 \;;
+#X obj 32 229 ofUpdate;
+#X obj 32 254 ofelia f \; rotate = rotate + 1 \;;
+#X obj 32 342 ofelia f \; ofTranslate(ofGetWidth()/2 \, ofGetHeight()/2)
+\; ofNoFill() \; ofRotateXDeg(rotate) \; ofRotateYRad(ofDegToRad(rotate))
+\; ofRotateZDeg(rotate) \; ofDrawBox(128) \;;
+#X connect 1 0 2 0;
+#X connect 3 0 10 0;
+#X connect 4 0 1 0;
+#X connect 5 0 7 0;
+#X connect 6 0 7 0;
+#X connect 8 0 9 0;

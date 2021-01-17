@@ -1,0 +1,16 @@
+#N canvas 2221 523 590 360 12;
+#X declare -path ofelia/abs;
+#X obj 375 58 declare -path ofelia/abs;
+#X msg 34 58 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 88 ofWindow;
+#X obj 35 136 ofDraw;
+#X obj 35 168 ofelia f \; ofNoFill() \; ofDrawRectangle(64 \, 64 \,
+64 \, 64) \; ofDrawCircle(192 \, 96 \, 32) \; ofDrawLine(256 \, 64
+\, 320 \, 128) \; ofFill() \; ofDrawTriangle(352 \, 128 \, 384 \, 64
+\, 416 \, 128) \; ofDrawEllipse(512 \, 96 \, 128 \, 64) \; ofDrawRectRounded(608
+\, 64 \, 64 \, 64 \, 9) \; ofDrawBezier(704 \, 64 \, 736 \, 128 \,
+768 \, 160 \, 800 \, 64) \;;
+#X obj 34 29 loadbang;
+#X connect 1 0 2 0;
+#X connect 3 0 4 0;
+#X connect 5 0 1 0;

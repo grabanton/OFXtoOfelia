@@ -1,0 +1,25 @@
+#N canvas 1107 269 706 407 12;
+#X declare -path ofelia/abs;
+#X obj 372 55 declare -path ofelia/abs;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 86 ofWindow;
+#X obj 34 291 ofDraw;
+#X obj 35 27 loadbang;
+#X obj 34 131 ofSetup;
+#X obj 95 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 34 161 dir 0 data/pixelPicture.png;
+#X obj 34 191 pdcontrol;
+#X obj 34 319 ofelia f \; image:draw(ofGetWidth()/2 - image:getWidth()/2
+\, ofGetHeight()/2 - image:getHeight()/2) \; image:resize(200 \, 200)
+\;;
+#X f 88;
+#X obj 34 219 ofelia f \; image = ofImage(a) \; image:rotate90(1) \;
+;
+#X connect 1 0 2 0;
+#X connect 3 0 9 0;
+#X connect 4 0 1 0;
+#X connect 5 0 7 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 10 0;

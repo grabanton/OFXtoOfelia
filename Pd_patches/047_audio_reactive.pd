@@ -1,0 +1,108 @@
+#N canvas 2224 282 816 697 12;
+#X declare -path ofelia/abs;
+#X obj 398 60 declare -path ofelia/abs;
+#X obj 34 88 ofWindow;
+#X obj 33 534 ofDraw;
+#X obj 35 29 loadbang;
+#X obj 33 133 ofSetup;
+#X obj 93 135 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 590 118 pdcontrol;
+#X obj 33 325 ofUpdate;
+#X msg 34 58 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X msg 590 89 dir 0 data/drumloop.wav;
+#X obj 253 169 vsl 15 128 0 1 0 1 empty empty Volume -10 -9 0 12 -191407
+-1 -1 6300 1;
+#X obj 306 169 vsl 15 128 0 1 0 1 empty empty Decay -10 -9 0 12 -191407
+-1 -1 11430 1;
+#X obj 590 60 loadbang;
+#X obj 589 300 dac~;
+#X obj 590 239 readsf~ 2;
+#X msg 678 207 0;
+#X msg 590 207 open \$1 \, 1;
+#X obj 590 147 t b s;
+#X obj 590 176 symbol;
+#N canvas 1704 616 375 240 spectrum 0;
+#X obj 31 26 inlet~;
+#X obj 31 57 rfft~;
+#X obj 32 94 *~;
+#X obj 62 94 *~;
+#X obj 33 126 sqrt~;
+#X obj 34 157 biquad~ 0 0 0 0 1;
+#X obj 173 184 tabwrite~ soundSpectrum;
+#X obj 244 23 block~ 2048 1;
+#X obj 173 157 inlet;
+#X obj 35 184 /~ 100;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 0 2 1;
+#X connect 1 1 3 0;
+#X connect 1 1 3 1;
+#X connect 2 0 4 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 9 0;
+#X connect 8 0 6 0;
+#X connect 9 0 6 0;
+#X restore 631 300 pd spectrum;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array soundSpectrum 64 float 0;
+#X coords 0 3 63 0 200 140 1 0 0;
+#X restore 374 156 graph;
+#X obj 589 269 *~;
+#X obj 619 269 *~;
+#X obj 306 309 ofelia f \; decay = a \;;
+#X obj 253 309 s vol;
+#X obj 665 239 r vol;
+#X obj 33 388 ofelia f \; soundSpectrum = ofArray("soundSpectrum"):get(0)
+\; for i = 1 \, bands do \; fft[i] = fft[i] * decay \; if fft[i] <
+soundSpectrum[i] then \; fft[i] = soundSpectrum[i] \; end \; end \;
+;
+#X f 49;
+#X obj 33 567 ofelia f \; ofSetColor(255 \, 255 \, 255 \, 50) \; for
+i = 1 \, bands do \; ofDrawRectangle(ofGetWidth() / 2 \, 128 \, fft[i]
+* 100 \, 128) \; ofDrawCircle(ofGetWidth() / 2 \, ofGetHeight() / 2
+\, fft[i] * 100) \; end \;;
+#X f 66;
+#X msg 660 46 \; pd dsp 1;
+#X text 510 579 Set alpha to 50 to get more color gradations., f 22
+;
+#X obj 33 168 ofelia f \; decay = 0.9 \; fft = ofTable() \; soundSpectrum
+= ofTable() \; bands = 64 \; for i = 1 \, 128 do \; fft[i] = 0 \; end
+\; ofSetCircleResolution(128) \;;
+#X obj 83 355 s upd;
+#X obj 705 272 r upd;
+#X obj 33 355 t b b;
+#X text 418 449 ofSoundUpdate and ofSoundSpectrum are ignored in ofelia
+source code. So I decided to make this example using Pd array and fourier
+transform., f 37;
+#X connect 2 0 27 0;
+#X connect 3 0 8 0;
+#X connect 4 0 30 0;
+#X connect 5 0 30 0;
+#X connect 6 0 17 0;
+#X connect 7 0 33 0;
+#X connect 8 0 1 0;
+#X connect 9 0 6 0;
+#X connect 10 0 24 0;
+#X connect 11 0 23 0;
+#X connect 12 0 9 0;
+#X connect 12 0 28 0;
+#X connect 14 0 21 0;
+#X connect 14 1 22 0;
+#X connect 14 2 18 0;
+#X connect 15 0 14 0;
+#X connect 16 0 14 0;
+#X connect 17 0 18 0;
+#X connect 17 1 18 1;
+#X connect 18 0 16 0;
+#X connect 21 0 13 0;
+#X connect 21 0 19 0;
+#X connect 22 0 13 1;
+#X connect 22 0 19 0;
+#X connect 25 0 21 1;
+#X connect 25 0 22 1;
+#X connect 32 0 19 1;
+#X connect 33 0 26 0;
+#X connect 33 1 31 0;

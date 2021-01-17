@@ -1,0 +1,20 @@
+#N canvas 1104 208 584 402 12;
+#X declare -path ofelia/abs;
+#X obj 383 59 declare -path ofelia/abs;
+#X obj 34 89 ofWindow;
+#X obj 32 253 ofDraw;
+#X obj 34 30 loadbang;
+#X obj 33 138 ofSetup;
+#X obj 94 139 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 170 ofelia f \; cam = ofEasyCam() \; cam:setDistance(200)
+\;;
+#X obj 32 281 ofelia f \; cam:beginCamera() \; ofNoFill() \; ofDrawSphere(64)
+\; ofDrawCircle(0 \, 0 \, 72) \; cam:endCamera() \;;
+#X msg 34 59 setPosition 30 100 \, setSize 1024 768 \, create, f 46
+;
+#X connect 2 0 7 0;
+#X connect 3 0 8 0;
+#X connect 4 0 6 0;
+#X connect 5 0 6 0;
+#X connect 8 0 1 0;

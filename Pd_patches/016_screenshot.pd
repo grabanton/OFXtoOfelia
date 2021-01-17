@@ -1,0 +1,31 @@
+#N canvas 1129 281 589 630 12;
+#X declare -path ofelia/abs;
+#X obj 366 55 declare -path ofelia/abs;
+#X msg 34 55 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 85 ofWindow;
+#X obj 33 529 ofDraw;
+#X obj 34 26 loadbang;
+#X obj 34 131 ofSetup;
+#X obj 95 132 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 557 ofelia f \; ofDrawCircle(ofGetMouseX() \, ofGetMouseY()
+\, 128) \;;
+#X f 54;
+#X obj 33 315 ofKeyPressed;
+#X obj 34 182 pdcontrol;
+#X msg 34 156 dir 0 data/screenshot_;
+#X obj 33 345 ofelia f \; if a == 32 then \; snaped = true \; end \;
+\; if snaped then \; local path = savepath .. string.format("%03d.png"
+\, count) \; imgScreenshot:grabScreen(0 \, 0 \, ofGetWidth() \, ofGetHeight())
+\; imgScreenshot:save(path) \; count = count + 1 \; end \;;
+#X f 62;
+#X obj 34 210 ofelia f \; imgScreenshot = ofImage() \; savepath = a
+\; count = 1 \; snaped = false \;;
+#X connect 1 0 2 0;
+#X connect 3 0 7 0;
+#X connect 4 0 1 0;
+#X connect 5 0 10 0;
+#X connect 6 0 10 0;
+#X connect 8 0 11 0;
+#X connect 9 0 12 0;
+#X connect 10 0 9 0;

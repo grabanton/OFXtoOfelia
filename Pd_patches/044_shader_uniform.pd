@@ -1,0 +1,29 @@
+#N canvas 1113 106 775 552 12;
+#X declare -path ofelia/abs;
+#X obj 560 58 declare -path ofelia/abs;
+#X obj 34 88 ofWindow;
+#X obj 33 420 ofDraw;
+#X obj 34 29 loadbang;
+#X obj 33 133 ofSetup;
+#X obj 93 135 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 33 188 pdcontrol;
+#X msg 33 161 dir 0 data/shader2;
+#X msg 34 58 setGLVersion 3 2 \, setPosition 30 100 \, setSize 1024
+768 \, create, f 72;
+#X obj 33 214 ofelia f \; shader = ofShader() \; shader:load(a) \;
+;
+#X obj 33 447 ofelia f \; shader:beginShader() \; ofDrawRectangle(0
+\, 0 \, ofGetWidth() \, ofGetHeight()) \; shader:endShader() \;;
+#X obj 32 291 ofUpdate;
+#X obj 32 319 ofelia f \; red = math.sin(ofGetElapsedTimef()) * 2 \;
+shader:beginShader() \; shader:setUniform1f("u_red" \, red) \; shader:endShader()
+\;;
+#X connect 2 0 10 0;
+#X connect 3 0 8 0;
+#X connect 4 0 7 0;
+#X connect 5 0 7 0;
+#X connect 6 0 9 0;
+#X connect 7 0 6 0;
+#X connect 8 0 1 0;
+#X connect 11 0 12 0;

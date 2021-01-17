@@ -1,0 +1,99 @@
+#N canvas 2068 204 781 734 12;
+#X declare -path ofelia/abs;
+#X obj 388 58 declare -path ofelia/abs;
+#X obj 34 88 ofWindow;
+#X obj 33 534 ofDraw;
+#X obj 34 29 loadbang;
+#X obj 33 133 ofSetup;
+#X obj 93 135 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 576 116 pdcontrol;
+#X obj 33 325 ofUpdate;
+#X msg 34 58 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 274 135 vsl 15 128 0 1 0 1 empty empty Volume -10 -9 0 12 -191407
+-1 -1 6500 1;
+#X obj 576 58 loadbang;
+#X obj 575 298 dac~;
+#X obj 576 237 readsf~ 2;
+#X msg 664 205 0;
+#X msg 576 205 open \$1 \, 1;
+#X obj 576 145 t b s;
+#X obj 576 174 symbol;
+#N canvas 1466 830 375 240 spectrum 0;
+#X obj 31 26 inlet~;
+#X obj 31 57 rfft~;
+#X obj 32 94 *~;
+#X obj 62 94 *~;
+#X obj 33 126 sqrt~;
+#X obj 34 157 biquad~ 0 0 0 0 1;
+#X obj 173 184 tabwrite~ soundSpectrum;
+#X obj 173 157 inlet;
+#X obj 244 23 block~ 4096 1;
+#X obj 35 184 /~ 100;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 0 2 1;
+#X connect 1 1 3 0;
+#X connect 1 1 3 1;
+#X connect 2 0 4 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 9 0;
+#X connect 7 0 6 0;
+#X connect 9 0 6 0;
+#X restore 617 298 pd spectrum;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array soundSpectrum 512 float 0;
+#X coords 0 3 511 0 200 140 1 0 0;
+#X restore 339 132 graph;
+#X obj 575 267 *~;
+#X obj 605 267 *~;
+#X obj 274 275 s vol;
+#X obj 651 237 r vol;
+#X msg 646 44 \; pd dsp 1;
+#X obj 83 355 s upd;
+#X obj 691 270 r upd;
+#X obj 33 355 t b b;
+#X obj 33 388 ofelia f \; soundSpectrum = ofArray("soundSpectrum"):get(0)
+\; for i = 1 \, bands do \; fft[i] = fft[i] * 0.9 \; if fft[i] < soundSpectrum[i]
+then \; fft[i] = soundSpectrum[i] \; end \; end \;;
+#X f 49;
+#X obj 33 168 ofelia f \; fft = ofTable() \; soundSpectrum = ofTable()
+\; bands = 512 \; for i = 1 \, 512 do \; fft[i] = 0 \; end \;;
+#X obj 33 567 ofelia f \; ofTranslate(256 \, 192) \; for i = 0 \, bands-1
+\, 16 do \; polyline = ofPolyline() \; for j = 0 \, bands-1 do \; polyline:addVertex(j
+\, i - fft[j+1] * 60) \; end \; polyline:draw() \; end \;;
+#X f 42;
+#X msg 576 87 dir 0 data/drums.wav;
+#X text 418 449 ofSoundUpdate and ofSoundSpectrum are ignored in ofelia
+source code. So I decided to make this example using Pd array and fourier
+transform., f 38;
+#X connect 2 0 29 0;
+#X connect 3 0 8 0;
+#X connect 4 0 28 0;
+#X connect 5 0 28 0;
+#X connect 6 0 15 0;
+#X connect 7 0 26 0;
+#X connect 8 0 1 0;
+#X connect 9 0 21 0;
+#X connect 10 0 30 0;
+#X connect 10 0 23 0;
+#X connect 12 0 19 0;
+#X connect 12 1 20 0;
+#X connect 12 2 16 0;
+#X connect 13 0 12 0;
+#X connect 14 0 12 0;
+#X connect 15 0 16 0;
+#X connect 15 1 16 1;
+#X connect 16 0 14 0;
+#X connect 19 0 11 0;
+#X connect 19 0 17 0;
+#X connect 20 0 11 1;
+#X connect 20 0 17 0;
+#X connect 22 0 19 1;
+#X connect 22 0 20 1;
+#X connect 25 0 17 1;
+#X connect 26 0 27 0;
+#X connect 26 1 24 0;
+#X connect 30 0 6 0;

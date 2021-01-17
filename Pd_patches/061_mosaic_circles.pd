@@ -1,0 +1,30 @@
+#N canvas 2264 292 623 677 12;
+#X declare -path ofelia/abs;
+#X obj 398 58 declare -path ofelia/abs;
+#X obj 34 88 ofWindow;
+#X obj 32 348 ofDraw;
+#X obj 34 29 loadbang;
+#X obj 33 133 ofSetup;
+#X obj 93 135 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 32 257 ofUpdate;
+#X msg 34 58 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 32 555 ofExit;
+#X obj 32 285 ofelia f \; grabber:update() \;;
+#X f 18;
+#X obj 32 584 ofelia f \; grabber:close() \; grabber = nil \;;
+#X obj 32 377 ofelia f \; for i = 0 \, grabber:getWidth() \, 16 do
+\; for j = 0 \, grabber:getHeight() \, 16 do \; local color = grabber:getPixels():getColor(i
+\, j) \; local brightness = color:getBrightness() \; local radius =
+ofMap(brightness \, 0 \, 255 \, 0 \, 8) \; ofSetColor(color) \; ofDrawCircle(i
+\, j \, radius) \; end \; end \;;
+#X obj 33 165 ofelia f \; ofSetBackgroundColor(0) \; grabber = ofVideoGrabber()
+\; grabber:setup(1024 \, 768) \;;
+#X connect 2 0 11 0;
+#X connect 3 0 7 0;
+#X connect 4 0 12 0;
+#X connect 5 0 12 0;
+#X connect 6 0 9 0;
+#X connect 7 0 1 0;
+#X connect 8 0 10 0;

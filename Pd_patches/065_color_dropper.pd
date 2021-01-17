@@ -1,0 +1,33 @@
+#N canvas 2320 272 614 643 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 32 300 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 33 131 ofSetup;
+#X obj 93 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X msg 33 159 dir 0 data/foxy.png;
+#X obj 33 187 pdcontrol;
+#X obj 33 216 ofelia f \; image = ofImage() \; image:load(a) \; color
+= ofColor() \;;
+#X obj 32 329 ofelia f \; ofSetColor(255) \; image:draw(0 \, 0) \;
+ofFill() \; ofSetColor(color) \; ofDrawRectangle(image:getWidth() \,
+0 \, 128 \, 128) \;;
+#X obj 31 444 ofMousePressed;
+#X obj 31 474 ofelia f \; color = image:getPixels():getColor(a[1] \,
+a[2]) \;;
+#X obj 31 564 ofelia f \; color = image:getPixels():getColor(a[1] \,
+a[2]) \;;
+#X obj 31 534 ofMouseDragged;
+#X connect 2 0 10 0;
+#X connect 3 0 6 0;
+#X connect 4 0 7 0;
+#X connect 5 0 7 0;
+#X connect 6 0 1 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 11 0 12 0;
+#X connect 14 0 13 0;

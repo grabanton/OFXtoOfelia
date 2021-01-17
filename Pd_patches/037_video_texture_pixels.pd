@@ -1,0 +1,31 @@
+#N canvas 1178 262 581 584 12;
+#X declare -path ofelia/abs;
+#X obj 367 59 declare -path ofelia/abs;
+#X msg 34 59 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 89 ofWindow;
+#X obj 34 490 ofDraw;
+#X obj 34 30 loadbang;
+#X obj 34 138 ofSetup;
+#X obj 94 140 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 34 193 pdcontrol;
+#X obj 34 352 ofUpdate;
+#X obj 34 516 ofelia f \; texture:draw(0 \, 0) \;;
+#X obj 34 222 ofelia f \; video = ofVideoPlayer() \; video:load(a)
+\; video:setVolume(0) \; video:play() \; texture = ofTexture() \; texture:allocate(video:getWidth()
+\, video:getHeight() \, GL_RGBA) \;;
+#X f 64;
+#X obj 34 378 ofelia f \; video:update() \; if video:isFrameNew() then
+\; pixels = ofPixels(video:getPixels()) \; texture:loadData(pixels)
+\; end \;;
+#X msg 34 166 dir 0 data/video.mp4;
+#X text 285 115 For some reason this patch crashes on my machine after
+playing for some time. Windows 10 GTX 1080 Ti, f 28;
+#X connect 1 0 2 0;
+#X connect 3 0 9 0;
+#X connect 4 0 1 0;
+#X connect 5 0 12 0;
+#X connect 6 0 12 0;
+#X connect 7 0 10 0;
+#X connect 8 0 11 0;
+#X connect 12 0 7 0;

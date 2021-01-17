@@ -1,0 +1,145 @@
+#N canvas 1435 119 807 902 12;
+#X declare -path ofelia/abs;
+#X obj 368 61 declare -path ofelia/abs;
+#X msg 34 61 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 91 ofWindow;
+#X obj 35 765 ofDraw;
+#X obj 34 32 loadbang;
+#X obj 35 137 ofSetup;
+#X obj 97 138 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 35 502 ofMouseDragged;
+#X msg 35 166 dir 0 data/screenshot_;
+#X obj 35 193 pdcontrol;
+#X obj 412 134 hsl 128 15 1 8 0 1 \$0-size empty Brush_size -80 8 0
+12 -191407 -1 -1 9200 1;
+#X obj 391 160 cnv 15 164 80 empty \$0-brush empty 20 12 0 14 -260737
+-24198 0;
+#X obj 411 171 hsl 128 15 0 255 0 1 \$0-brushR empty R 5 8 0 12 -258113
+-1 -1 12700 1;
+#X obj 411 190 hsl 128 15 0 255 0 1 \$0-brushG empty G 5 8 0 12 -4034
+-1 -1 8400 1;
+#X obj 411 210 hsl 128 15 0 255 0 1 \$0-brushB empty B 5 8 0 12 -4160
+-1 -1 0 1;
+#X text 302 191 Brush color;
+#X obj 392 249 cnv 15 164 80 empty \$0-back empty 20 12 0 14 -395 -66577
+0;
+#X obj 411 260 hsl 128 15 0 255 0 0 \$0-backR empty R 5 8 0 12 -258113
+-1 -1 0 1;
+#X obj 411 279 hsl 128 15 0 255 0 1 \$0-backG empty G 5 8 0 12 -4034
+-1 -1 1300 1;
+#X obj 411 299 hsl 128 15 0 255 0 1 \$0-backB empty B 5 8 0 12 -4160
+-1 -1 2100 1;
+#X text 267 279 Background color;
+#X text 289 342 Background clear;
+#X obj 35 796 ofelia f \; fbo:draw(0 \, 0) \; ofNoFill() \; ofDrawRectangle(0
+\, 0 \, width \, height) \;;
+#X obj 280 502 ofKeyPressed;
+#X obj 280 531 ofelia f \; if a == 32 then \; imgScreenshot:grabScreen(0
+\, 0 \, fbo:getWidth() \, fbo:getHeight()) \; local filename = imgPath
+.. string.format("%03d.png" \, count) \; imgScreenshot:save(filename)
+\; count = count + 1 \; end \;;
+#X f 67;
+#X obj 35 531 ofelia f \; fbo:beginFbo() \; ofSetLineWidth(size) \;
+ofSetColor(color) \; polyline:addVertex(a[1] \, a[2]) \; polyline:draw()
+\; fbo:endFbo() \;;
+#X obj 34 654 ofMousePressed;
+#X obj 34 683 ofelia f \; fbo:beginFbo() \; polyline:clear() \; fbo:endFbo()
+\;;
+#X obj 35 222 ofelia f \; ofEnableSmoothing() \; ofSetBackgroundColor(0)
+\; polyline = ofPolyline() \; imgScreenshot = ofImage() \; imgPath
+= a \; count = 1 \; fbo = ofFbo() \; width = 800 \; height = 600 \;
+\; fbo:allocate(width \, height) \; fbo:beginFbo() \; ofClear(255)
+\; fbo:endFbo() \; \; size = 3 \; color = ofColor(255) \;;
+#X obj 410 344 bng 15 250 50 0 \$0-clear empty empty 17 7 0 10 -191407
+-1 -1;
+#N canvas 559 399 488 537 get 0;
+#X obj 53 417 ofelia f \; fbo:beginFbo() \; ofClear(255) \; fbo:endFbo()
+\;;
+#X obj 53 159 t b f;
+#X obj 92 159 t b f;
+#X obj 53 187 pack 0 0 0;
+#X obj 147 173 ofelia f \; color:set(a[1] \, a[2] \, a[3]) \;;
+#X obj 52 288 t b f;
+#X obj 91 288 t b f;
+#X obj 143 301 ofelia f \; ofSetBackgroundColor(a[1] \, a[2] \, a[3])
+\;;
+#X obj 52 316 pack 0 0 0;
+#N canvas 1953 550 317 282 set 0;
+#X obj 62 27 inlet;
+#X obj 62 55 unpack 0 0 0;
+#X obj 62 140 makefilename %02x;
+#X obj 102 111 makefilename %02x;
+#X obj 143 82 makefilename %02x;
+#X obj 62 170 pack s s s;
+#X obj 62 230 s \$0-brush;
+#X msg 62 200 color #\$1\$2\$3;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 1 3 0;
+#X connect 1 2 4 0;
+#X connect 2 0 5 0;
+#X connect 3 0 5 1;
+#X connect 4 0 5 2;
+#X connect 5 0 7 0;
+#X connect 7 0 6 0;
+#X restore 53 215 pd set brush color;
+#N canvas 1953 550 317 282 set 0;
+#X obj 62 27 inlet;
+#X obj 62 55 unpack 0 0 0;
+#X obj 62 140 makefilename %02x;
+#X obj 102 111 makefilename %02x;
+#X obj 143 82 makefilename %02x;
+#X obj 62 170 pack s s s;
+#X msg 62 200 color #\$1\$2\$3;
+#X obj 62 230 s \$0-back;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 1 3 0;
+#X connect 1 2 4 0;
+#X connect 2 0 5 0;
+#X connect 3 0 5 1;
+#X connect 4 0 5 2;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X restore 52 346 pd set back color;
+#X obj 53 388 r \$0-clear;
+#X obj 55 65 ofelia f \; size = a \;;
+#X obj 55 38 r \$0-size;
+#X obj 53 126 r \$0-brushR;
+#X obj 133 126 r \$0-brushG;
+#X obj 213 126 r \$0-brushB;
+#X obj 52 256 r \$0-backR;
+#X obj 132 256 r \$0-backG;
+#X obj 212 256 r \$0-backB;
+#X connect 1 0 3 0;
+#X connect 1 1 3 1;
+#X connect 2 0 3 0;
+#X connect 2 1 3 2;
+#X connect 3 0 4 0;
+#X connect 3 0 9 0;
+#X connect 5 0 8 0;
+#X connect 5 1 8 1;
+#X connect 6 0 8 0;
+#X connect 6 1 8 2;
+#X connect 8 0 7 0;
+#X connect 8 0 10 0;
+#X connect 11 0 0 0;
+#X connect 13 0 12 0;
+#X connect 14 0 3 0;
+#X connect 15 0 1 0;
+#X connect 16 0 2 0;
+#X connect 17 0 8 0;
+#X connect 18 0 5 0;
+#X connect 19 0 6 0;
+#X restore 489 341 pd get ui;
+#X connect 1 0 2 0;
+#X connect 3 0 22 0;
+#X connect 4 0 1 0;
+#X connect 5 0 8 0;
+#X connect 6 0 8 0;
+#X connect 7 0 25 0;
+#X connect 8 0 9 0;
+#X connect 9 0 28 0;
+#X connect 23 0 24 0;
+#X connect 26 0 27 0;

@@ -1,0 +1,25 @@
+#N canvas 1074 267 869 404 12;
+#X declare -path ofelia/abs;
+#X obj 371 55 declare -path ofelia/abs;
+#X msg 34 55 setPosition 30 100 \, setSize 1024 768 \, create;
+#X obj 34 85 ofWindow;
+#X obj 33 310 ofDraw;
+#X obj 35 26 loadbang;
+#X obj 34 131 ofSetup;
+#X obj 97 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 34 160 dir 0 data/Iron.ttf;
+#X obj 32 183 pdcontrol;
+#X obj 32 210 ofelia f \; ofSetBackgroundColor(150) \; font = ofTrueTypeFont()
+\; font:load(a \, 32) \; text = "Hello world!" \;;
+#X obj 33 338 ofelia f \; font:drawString(text \, ofGetWidth()/2 -
+font:stringWidth(text)/2 \, ofGetHeight()/2 - font:stringHeight(text)/2)
+\;;
+#X f 113;
+#X connect 1 0 2 0;
+#X connect 3 0 10 0;
+#X connect 4 0 1 0;
+#X connect 5 0 7 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;

@@ -1,0 +1,111 @@
+#N canvas 1099 130 630 773 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 34 468 ofDraw;
+#X obj 34 27 loadbang;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 34 130 ofSetup;
+#X msg 34 160 dir 0 data/torus.ply;
+#X obj 34 189 pdcontrol;
+#X obj 95 132 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 408 187 hsl 128 15 -300 300 0 1 \$0-posX empty X 5 8 0 10 -191407
+-1 -1 6350 1;
+#X obj 408 207 hsl 128 15 -300 300 0 1 \$0-posY empty Y 5 8 0 10 -191407
+-1 -1 6350 1;
+#X obj 408 227 hsl 128 15 -300 300 0 1 \$0-posZ empty Z 5 8 0 10 -191407
+-1 -1 6350 1;
+#X text 295 206 Light Position;
+#X text 304 286 Light Color;
+#X obj 34 364 ofUpdate;
+#X obj 34 393 ofelia f \; light:setPosition(lightPosition:vec3()) \;
+light:setAmbientColor(lightColor) \;;
+#X obj 405 115 ofKeyPressed;
+#X obj 34 497 ofelia f \; ofEnableDepthTest() \; light:enable() \;
+ofPushMatrix() \; cam:beginCamera() \; \; for i = 0 \, 29 do \; ofScale(0.8)
+\; ofRotateXDeg(math.sin(i + ofGetElapsedTimef()) * 6) \; model:drawFaces()
+\; end \; \; cam:endCamera() \; ofPopMatrix() \; light:disable() \;
+ofDisableDepthTest() \;;
+#X obj 405 143 ofelia f \; return 0;
+#X obj 34 219 ofelia f \; lightPosition = ofVec3f(0 \, 0 \, 0) \; lightColor
+= ofFloatColor(0) \; model = ofMesh() \; model:load(a) \; light = ofLight()
+\; cam = ofEasyCam() \; cam:setDistance(900) \;;
+#N canvas 1133 734 363 391 get 0;
+#X obj 49 75 t b f;
+#X obj 97 75 t b f;
+#X obj 49 101 pack 0 0 0;
+#X obj 49 131 ofelia f \; lightPosition:set(a[1] \, a[2] \, a[3]) \;
+;
+#X obj 49 245 t b f;
+#X obj 97 245 t b f;
+#X obj 49 271 pack 0 0 0;
+#X obj 49 301 ofelia f \; lightColor:set(a[1] \, a[2] \, a[3]) \;;
+#X obj 49 44 r \$0-posX;
+#X obj 125 44 r \$0-posY;
+#X obj 202 44 r \$0-posZ;
+#X obj 49 214 r \$0-R;
+#X obj 105 214 r \$0-G;
+#X obj 162 214 r \$0-B;
+#N canvas 1713 322 327 355 set 0;
+#X obj 62 27 inlet;
+#X obj 62 55 unpack 0 0 0;
+#X obj 62 191 makefilename %02x;
+#X obj 102 156 makefilename %02x;
+#X obj 143 122 makefilename %02x;
+#X obj 62 221 pack s s s;
+#X msg 62 251 color #\$1\$2\$3;
+#X obj 62 281 s \$0-light;
+#X obj 143 89 * 255;
+#X obj 102 122 * 255;
+#X obj 62 156 * 255;
+#X connect 0 0 1 0;
+#X connect 1 0 10 0;
+#X connect 1 1 9 0;
+#X connect 1 2 8 0;
+#X connect 2 0 5 0;
+#X connect 3 0 5 1;
+#X connect 4 0 5 2;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 8 0 4 0;
+#X connect 9 0 3 0;
+#X connect 10 0 2 0;
+#X restore 140 271 pd set light color;
+#X connect 0 0 2 0;
+#X connect 0 1 2 1;
+#X connect 1 0 2 0;
+#X connect 1 1 2 2;
+#X connect 2 0 3 0;
+#X connect 4 0 6 0;
+#X connect 4 1 6 1;
+#X connect 5 0 6 0;
+#X connect 5 1 6 2;
+#X connect 6 0 7 0;
+#X connect 6 0 14 0;
+#X connect 8 0 2 0;
+#X connect 9 0 0 0;
+#X connect 10 0 1 0;
+#X connect 11 0 6 0;
+#X connect 12 0 4 0;
+#X connect 13 0 5 0;
+#X restore 488 348 pd get ui;
+#X obj 390 254 cnv 15 164 80 empty \$0-light empty 20 12 0 14 -1102
+-66577 0;
+#X obj 408 267 hsl 128 15 0 1 0 1 \$0-R empty R 5 8 0 10 -258113 -1
+-1 0 1;
+#X obj 408 287 hsl 128 15 0 1 0 1 \$0-G empty G 5 8 0 10 -4034 -1 -1
+3435 1;
+#X obj 408 307 hsl 128 15 0 1 0 1 \$0-B empty B 5 8 0 10 -4160 -1 -1
+2600 1;
+#X connect 2 0 17 0;
+#X connect 3 0 4 0;
+#X connect 4 0 1 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 19 0;
+#X connect 8 0 6 0;
+#X connect 14 0 15 0;
+#X connect 16 0 18 0;
+#X connect 18 0 9 0;

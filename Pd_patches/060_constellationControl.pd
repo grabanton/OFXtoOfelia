@@ -1,0 +1,55 @@
+#N canvas 1960 68 823 1072 12;
+#X declare -path ofelia/abs;
+#X obj 398 56 declare -path ofelia/abs;
+#X obj 34 86 ofWindow;
+#X obj 31 862 ofDraw;
+#X obj 34 27 loadbang;
+#X obj 33 131 ofSetup;
+#X obj 93 133 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 32 469 ofUpdate;
+#X msg 34 56 setPosition 30 100 \, setSize 1024 768 \, create, f 47
+;
+#X obj 398 108 udpreceive 8000;
+#X obj 398 135 unpackOSC;
+#X obj 398 162 list;
+#X obj 398 189 ofelia f \; if a[1] == "/1/amount" then \; uiAmount
+= a[2] \; elseif a[1] == "/1/position/1" then \; uiPos1 = a[2] \; elseif
+a[1] == "/1/position/2" then \; uiPos2 = a[2] \; elseif a[1] == "/1/position/3"
+then \; uiPos3 = a[2] \; elseif a[1] == "/1/position/4" then \; uiPos4
+= a[2] \; elseif a[1] == "/1/position/5" then \; uiPos5 = a[2] \; elseif
+a[1] == "/1/position/6" then \; uiPos6 = a[2] \; elseif a[1] == "/1/distance"
+then \; uiDistance = a[2] \; elseif a[1] == "/1/points" then \; uiPoints
+= a[2]==1 \; end \;;
+#X obj 33 168 ofelia f \; mesh = ofMesh() \; uiAmount = 100 \; uiPos1
+= -300 \; uiPos2 = 300 \; uiPos3 = -300 \; uiPos4 = 300 \; uiPos5 =
+-50 \; uiPos6 = 50 \; uiDistance = 75 \; uiPoints = true \; \; ofSetBackgroundColor(0)
+\; ofSetFrameRate(60) \; mesh:setMode(OF_PRIMITIVE_LINES) \;;
+#X obj 31 891 ofelia f \; ofTranslate(ofGetWidth()/2 \, ofGetHeight()/2)
+\; if uiPoints then \; for i = 0 \, mesh:getVertices():size()-1 do
+\; ofSetColor(255) \; ofDrawSphere(mesh:getVertex(i) \, 3) \; end \;
+end \; mesh:draw() \;;
+#X obj 32 497 ofelia f \; ofSeedRandom(30) \; mesh:clear() \; for i
+= 1 \, uiAmount do \; \; local position = ofVec3f(ofMap(ofNoise(ofRandom(600)
+\, ofGetElapsedTimef()*0.006) \, 0 \, 1 \, uiPos1 \, uiPos2) \, ofMap(ofNoise(ofRandom(600)
+\, ofGetElapsedTimef()*0.006) \, 0 \, 1 \, uiPos3 \, uiPos4) \, ofMap(ofNoise(ofRandom(600)
+\, ofGetElapsedTimef()*0.006) \, 0 \, 1 \, uiPos5 \, uiPos6)) \; \;
+mesh:addVertex(position:vec3()) \; mesh:addColor(ofFloatColor(1)) \;
+end \; \; for i = 0 \, mesh:getVertices():size()-1 do \; local position
+= ofVec3f(mesh:getVertex(i)) \; for j = 0 \, mesh:getVertices():size()-1
+do \; local jdistance = ofVec3f(mesh:getVertex(j)) \; local distance
+= position:distance(jdistance) \; if distance < uiDistance then \;
+mesh:addIndex(i) \; mesh:addIndex(j) \; end \; end \; end \;;
+#X f 105;
+#X text 377 887 Be attentive when iterate by vertices in mesh. In Lua
+indices of tables starts with 1 \, but ofMesh():getVrtex() starts from
+0 as in normal programming language ));
+#X connect 2 0 13 0;
+#X connect 3 0 7 0;
+#X connect 4 0 12 0;
+#X connect 5 0 12 0;
+#X connect 6 0 14 0;
+#X connect 7 0 1 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
