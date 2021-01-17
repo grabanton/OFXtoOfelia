@@ -17,6 +17,7 @@ Watch the original openFrameworks playlist here: [**openFrameworks Tutorial Seri
 
 ## Resources
 
+* original tutorial series [**GitHub repo**](https://github.com/lewlepton/openFrameworksTutorialSeries)
 * ofelia [**GitHub repo**](https://github.com/cuinjune/Ofelia)
 * ofxLua [**GitHub repo**](https://github.com/danomatika/ofxLua)
 * openFrameworks [**Documentation**](https://openframeworks.cc/documentation/)
